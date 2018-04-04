@@ -11,8 +11,11 @@ RUN     mkdir -p /opt && \
         cp -rp /opt/dcmtk-3.6.3-linux-x86_64-static/* /usr/local && \
         rm -rf /opt && \
         mkdir /dicom_images && \
-        mkdir /jpeg_images
+        mkdir /jpeg_images && \
+        mkdir /lsyncd
 
-VOLUME /etc/lsyncd
+COPY process.lua /etc/lsyncd/process.lua
+
+VOLUME /etc/lsyncd /lsyncd
 
 CMD ["lsyncd", "/etc/lsyncd/process.lua"]
